@@ -2,7 +2,7 @@
     width: full;
     margin: 10 auto;
     padding: 20px;
-    font-style: 'Arial Black';
+    font-style: 'Arial Black', Arial, sans-serif;
     font-size: 36px;
     display: flex;
     justify-content: center;
@@ -18,7 +18,7 @@
     width: full;
     margin: 10 auto;
     padding: 20px;
-    font-style: 'Arial Black';
+    font-style: 'Arial Black', Arial, sans-serif;
     font-size: 30px;
     display: flex;
     justify-content: center;
@@ -35,7 +35,7 @@
     width: full;
     margin: 10 auto;
     padding: 20px;
-    font-style: 'Arial';
+    font-style: 'Arial Black', Arial, sans-serif;
     font-size: 20px;
     display: flex;
     justify-content: center;
@@ -52,7 +52,7 @@
     margin: 10 auto;
     padding: 20px;
     font-size: 30px;
-    font-style: 'Arial Black';
+    font-style: 'Arial Black', Arial, sans-serif;
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;
@@ -67,7 +67,7 @@
     width: full;
     margin: 10 auto;
     padding: 20px;
-    font-style: 'Arial Black';
+    font-style: 'Arial Black', Arial, sans-serif;
     font-size: 30px;
     display: flex;
     justify-content: center;
@@ -83,7 +83,7 @@
     width: full;
     margin: 10 auto;
     padding: 20px;
-    font-style: 'Arial';
+    font-style: 'Arial Black', Arial, sans-serif;
     font-size: 20px;
     display: flex;
     justify-content: center;
@@ -106,7 +106,7 @@
     max-width: 400px;
     padding: 20px 30px;
     font-size: 24px;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial Black', Arial, sans-serif;
     font-weight: bold;
     color: rgb(246,240,227);
     background-color: #FFA8A8;
@@ -129,7 +129,7 @@
     padding: 20px 30px;
     text-decoration: none; /* Убирает подчеркивание */
     font-size: 24px;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial Black', Arial, sans-serif;
     color: rgb(32, 61, 53);
     background-color: rgb(254, 225, 213);
     border-radius: 30px; /* Скругленные углы ссылок */
