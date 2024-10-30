@@ -35,13 +35,14 @@
 <div class="navbar">
     <a href="{{ url_for('home') }}"><b>Главная страница</b></a>
     <a href="{{ url_for('search') }}"><b>Поиск по корпусу</b></a>
+    <a href="{{ url_for('frequency') }}"><b>Частотности</b></a>
     <a href="https://github.com/kechsin/AHeroOfOurTime_Corpus/tree/main" target="_blank"><b>Наш GitHub</b></a>
 </div>
 
 <!-- Форма для выполнения поиска -->
 <div class="container">
     <div class="search-container d-flex justify-content-center">
-        <form method="POST" action="{{ url_for('search') }}" class="d-flex">
+        <form method="POST" action="{{ url_for('frequency') }}" class="d-flex">
             <!-- Поле для ввода поискового запроса -->
             <input type="text" name="query" class="search-input" placeholder="Например, NOUN VERB" required>
             <!-- Кнопка для отправки формы -->
