@@ -45,7 +45,7 @@
 
 ## Морфологическая разметка
 
-Мы использовали стандартный тегсет [Universal POS tags](https://universaldependencies.org/u/pos/all.html#al-u-pos/INTJ). Для разметки мы взяли библиотеку [stanza](https://github.com/stanfordnlp/stanza).
+Мы использовали стандартный тегсет [Universal POS tags](https://universaldependencies.org/u/pos/all.html#al-u-pos/INTJ). Для разметки мы взяли библиотеку [stanza](https://github.com/stanfordnlp/stanza). Stanza опирается на контекст и разрешает морфологическую неоднозначность достаточно хорошо. 
 
 `corpus_data.csv` — CSV файл, где хранится информация о каждом предложении (токены, леммы, теги, из какой части взято предложение).
 
