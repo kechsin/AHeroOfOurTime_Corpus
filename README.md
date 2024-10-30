@@ -14,7 +14,7 @@
 
 ## Морфологическая разметка
 
-Мы использовали стандартный тегсет [Universal POS tags](https://universaldependencies.org/u/pos/all.html#al-u-pos/INTJ), потому что
+Мы использовали стандартный тегсет [Universal POS tags](https://universaldependencies.org/u/pos/all.html#al-u-pos/INTJ).
 
 `corpus_data.csv` — CSV файл, где хранится информация о каждом предложении (токены, леммы, теги, из какой части взято предложение).
 
