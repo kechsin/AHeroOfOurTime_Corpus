@@ -44,7 +44,7 @@ class SearchEngineCSV:
             return token.strip('"').lower() == word.lower()  # Сравниваем без кавычек
         if '+' in token:  # Если токен содержит '+', значит, это лемма и POS-тег
             query_word, query_pos = token.split('+')  # Разделяем на слово и POS-тег
-            return lemma == query_word and pos == query_pos  # Сравниваем лемму и POS-тег
+            return lemma.lower() == query_word.lower() and pos.lower() == query_pos.lower()  # Сравниваем лемму и POS-тег
         if token in POS_TAGS:  # Если токен является частью речи
             return pos.lower() == token  # Сравниваем с POS-тегом
         return lemma == morph.parse(token)[0].normal_form  # Сравниваем с нормальной формой токена
@@ -104,6 +104,8 @@ class SearchEngineCSV:
 
     def match_sequence(self, query_tokens, words, lemmas, pos_tags):
         # Функция для проверки последовательности токенов
+        if len(query_tokens) > 2 and '"' in query_tokens[2]:
+            query_tokens[1] = query_tokens[1] + '"'
         for j, query_token in enumerate(query_tokens):
             # Если текущий токен запроса является частью речи
             if query_token in POS_TAGS:
