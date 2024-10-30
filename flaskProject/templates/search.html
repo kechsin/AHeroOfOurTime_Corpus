@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск</title>
+
+    <!-- Подключение Bootstrap CSS для стилизации элементов страницы -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_project.css') }}">
+
+    <!-- Скрипт для копирования текста в буфер обмена -->
+    <script>
+        function copyText(text, buttonId) {
+            navigator.clipboard.writeText(text).then(function() {
+                // Изменение иконки кнопки на иконку "галочка" после успешного копирования
+                const button = document.getElementById(buttonId);
+                button.innerHTML = '<i class="bi bi-check-circle"></i>';
+                // Возврат к иконке "бумажный клип" через 2 секунды
+                setTimeout(() => {
+                    button.innerHTML = '<i class="bi bi-clipboard"></i>';
+                }, 2000);
+            }).catch(function(error) {
+                // Вывод ошибки в консоль, если копирование не удалось
+                console.error('Ошибка копирования:', error);
+            });
+        }
+    </script>
+
+    <!-- Подключение иконок Bootstrap для кнопок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+</head>
+<body style="background-color: rgb(242, 205, 172)">
+
+<!-- Навигационная панель с ссылками на основные страницы проекта -->
+<div class="navbar">
+    <a href="{{ url_for('home') }}"><b>Главная страница</b></a>
+    <a href="{{ url_for('search') }}"><b>Поиск по корпусу</b></a>
+    <a href="https://github.com/kechsin/AHeroOfOurTime_Corpus/tree/main" target="_blank"><b>Наш GitHub</b></a>
+</div>
+
+<!-- Форма для выполнения поиска -->
+<div class="container">
+    <div class="search-container d-flex justify-content-center">
+        <form method="POST" action="{{ url_for('search') }}" class="d-flex">
+            <!-- Поле для ввода поискового запроса -->
+            <input type="text" name="query" class="search-input" placeholder="Например, NOUN VERB" required>
+            <!-- Кнопка для отправки формы -->
+            <button type="submit" class="search-button">Поиск</button>
+        </form>
+    </div>
+</div>
+
+<!-- Раздел для отображения результатов поиска -->
+<div class="container mt-3">
+    <div class="examples">
+        {% if query %}
+            <!-- Заголовок с текстом поискового запроса -->
+            <h3 class="result-text">Результаты поиска для: "{{ query }}"</h3>
+            <!-- Вывод количества найденных примеров -->
+            <p class="result-text">Количество примеров: {{ results|length }}</p>
+            <ul class="list-group">
+                <!-- Перебор найденных результатов и отображение каждого в списке -->
+                {% for result in results %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ result | safe }}</span>
+                        <!-- Кнопка для копирования текста результата -->
+                        <button id="copy-btn-{{ loop.index }}" class="btn btn-outline-secondary btn-sm"
+                                onclick="copyText('{{ result | safe }}', 'copy-btn-{{ loop.index }}')" title="Копировать текст">
+                            <i class="bi bi-clipboard"></i>
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
+
+<div style="height: 20px;"></div>
+
+<!-- Подключение необходимых скриптов для работы Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
