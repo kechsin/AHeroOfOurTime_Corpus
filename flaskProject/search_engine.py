@@ -1,7 +1,7 @@
 import csv  # Импортируем модуль для работы с CSV-файлами
 import pymorphy2  # Импортируем библиотеку для морфологического анализа
 import re  # Импортируем модуль для работы с регулярными выражениями
-import detokenize
+from detokenize.detokenizer import detokenize
 
 # Инициализация морфологического анализатора
 morph = pymorphy2.MorphAnalyzer()

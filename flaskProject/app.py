@@ -22,19 +22,19 @@ def search():
     results = []  # Список для хранения результатов поиска
     if request.method == 'POST':  # Если метод запроса POST (при отправке формы)
         query = request.form['query']  # Получаем значение поискового запроса из формы
-        results = search_engine.search(query)  # Выполняем поиск по запросу с помощью поискового движка
+        results = [i[0] for i in search_engine.search(query)]  # Выполняем поиск по запросу с помощью поискового движка
 
     # Отправляем шаблон search.html с запросом и результатами
     return render_template('search.html', query=query, results=results)
 
 
 @app.route('/frequency', methods=['GET', 'POST'])  # Определяем маршрут для страницы частотностей
-def search():
+def frequency():
     query = None  # Переменная для хранения поискового запроса
     results = []  # Список для хранения результатов поиска
     if request.method == 'POST':  # Если метод запроса POST (при отправке формы)
         query = request.form['query']  # Получаем значение поискового запроса из формы
-        results = search_engine.frequency(query)  # Выполняем поиск по запросу с помощью поискового движка
+        results = [str(i[0]) + ', ' + str(i[1]) for i in search_engine.frequency(query)]  # Выполняем поиск частотностей
 
     # Отправляем шаблон search.html с запросом и результатами
     return render_template('freq.html', query=query, results=results)
