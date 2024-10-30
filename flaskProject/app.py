@@ -28,6 +28,18 @@ def search():
     return render_template('search.html', query=query, results=results)
 
 
+@app.route('/frequency', methods=['GET', 'POST'])  # Определяем маршрут для страницы частотностей
+def search():
+    query = None  # Переменная для хранения поискового запроса
+    results = []  # Список для хранения результатов поиска
+    if request.method == 'POST':  # Если метод запроса POST (при отправке формы)
+        query = request.form['query']  # Получаем значение поискового запроса из формы
+        results = search_engine.frequency(query)  # Выполняем поиск по запросу с помощью поискового движка
+
+    # Отправляем шаблон search.html с запросом и результатами
+    return render_template('freq.html', query=query, results=results)
+
+
 # Проверяем, является ли этот файл основным модулем, и запускаем приложение
 if __name__ == "__main__":
     app.run(debug=True, port=50000)  # Запускаем приложение с отладкой на порту 50000

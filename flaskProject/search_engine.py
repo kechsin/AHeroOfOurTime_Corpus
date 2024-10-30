@@ -1,6 +1,7 @@
 import csv  # Импортируем модуль для работы с CSV-файлами
 import pymorphy2  # Импортируем библиотеку для морфологического анализа
 import re  # Импортируем модуль для работы с регулярными выражениями
+import detokenize
 
 # Инициализация морфологического анализатора
 morph = pymorphy2.MorphAnalyzer()
@@ -49,6 +50,21 @@ class SearchEngineCSV:
             return pos.lower() == token  # Сравниваем с POS-тегом
         return lemma == morph.parse(token)[0].normal_form  # Сравниваем с нормальной формой токена
 
+    def match_sequence(self, query_tokens, words, lemmas, pos_tags):
+        # Функция для проверки последовательности токенов
+        if len(query_tokens) > 2 and '"' in query_tokens[2]:
+            query_tokens[1] = query_tokens[1] + '"'
+        for j, query_token in enumerate(query_tokens):
+            # Если текущий токен запроса является частью речи
+            if query_token in POS_TAGS:
+                if pos_tags[j].lower() != query_token:  # Проверка соответствия POS-тега
+                    return False  # Если не совпадает, возвращаем False
+            else:
+                # Проверка соответствия слова, леммы и POS-тега
+                if not self.match_token(query_token, words[j], lemmas[j], pos_tags[j]):
+                    return False  # Если не совпадает, возвращаем False
+        return True  # Если все токены совпадают, возвращаем True
+
     def highlight_word(self, sentence, words, match_indices, obsolete_indices):
         # Функция для выделения искомых и устаревших слов в предложении
         highlighted_sentence = sentence  # Сохраняем оригинальное предложение
@@ -67,52 +83,43 @@ class SearchEngineCSV:
         return highlighted_sentence  # Возвращаем предложение с выделенными словами
 
     def search(self, query):
-        # Функция для поиска предложений, содержащих искомый запрос
-        query_tokens = query.lower().split()  # Приводим запрос к нижнему регистру и разбиваем на токены
-        matches = []  # Список для хранения найденных предложений
-        query_length = len(query_tokens)  # Длина запроса
+        query_tokens = query.lower().split()  # Приведение запроса к нижнему регистру
 
+        matches = []
         # Итерируем по индексам и предложениям
         for idx, sentence in enumerate(self.sentences):
-            words = self.tokens[idx]  # Получаем токены текущего предложения
-            lemmas = self.lemmas[idx]  # Получаем леммы текущего предложения
-            pos_tags = self.pos_tags[idx]  # Получаем POS-теги текущего предложения
-            obsolete_flags = self.is_obsolete[idx]  # Получаем индикаторы устаревших слов
+            words = self.tokens[idx]
+            lemmas = self.lemmas[idx]
+            pos_tags = self.pos_tags[idx]
+            if len(words) != len(lemmas) or len(words) != len(pos_tags):  # проверка, что количество токенов, лемм и тегов частей речи одинаковое
+                continue
 
-            # Проверяем, что количество токенов, лемм и POS-тегов совпадает
-            if len(words) != len(lemmas) or len(words) != len(pos_tags):
-                continue  # Если не совпадает, переходим к следующему предложению
+            # Поиск последовательности токенов в предложении
+            for i in range(len(words) - len(query_tokens) + 1):
+                formatted_sentence = ""
+                matches_in_sent = []
+                # Проверка последовательности для n-граммы
+                if self.match_sequence(query_tokens, words[i:i+len(query_tokens)], lemmas[i:i+len(query_tokens)], pos_tags[i:i+len(query_tokens)]):
+                    # Форматируем предложение с источником
+                    source_info = f"[{self.chapters[idx]}]"
+                    if formatted_sentence == "":
+                        formatted_sentence = f"{sentence} {source_info}"
+                    matches_in_sent.append((i, i + len(query_tokens)))  # информация о том, какие слова - ответ на запрос (номер первого слова последовательности и первого слова после неё)
+                if formatted_sentence != "":
+                    matches.append([formatted_sentence, matches_in_sent, idx])  # строка "текст предложения [номер главы]", список индексов слов, соответствующих запросу, и номер предложения
 
-            i = 0  # Инициализация индекса для поиска
-            # Цикл для поиска совпадений в предложении
-            while i <= len(words) - query_length:
-                # Если найдено совпадение
-                if self.match_sequence(query_tokens, words[i:i + query_length], lemmas[i:i + query_length],
-                                       pos_tags[i:i + query_length]):
-                    match_indices = list(range(i, i + query_length))  # Индексы совпадающих токенов
-                    # Индексы устаревших слов
-                    obsolete_indices = [j for j, flag in enumerate(obsolete_flags) if flag == 1]
-                    # Выделяем слова и формируем предложение с источником
-                    highlighted_sentence = self.highlight_word(sentence, words, match_indices, obsolete_indices)
-                    source_info = f"[{self.chapters[idx]}]"  # Информация о главе
-                    formatted_sentence = f"{highlighted_sentence} {source_info}"  # Форматируем итоговое предложение
-                    matches.append(formatted_sentence)  # Добавляем в список найденных
-                    i += 1  # Двигаем индекс на один элемент вперед для поиска следующих совпадений
-                else:
-                    i += 1  # Если совпадение не найдено, просто двигаем индекс
-        return matches  # Возвращаем список найденных предложений
+        return matches
 
-    def match_sequence(self, query_tokens, words, lemmas, pos_tags):
-        # Функция для проверки последовательности токенов
-        if len(query_tokens) > 2 and '"' in query_tokens[2]:
-            query_tokens[1] = query_tokens[1] + '"'
-        for j, query_token in enumerate(query_tokens):
-            # Если текущий токен запроса является частью речи
-            if query_token in POS_TAGS:
-                if pos_tags[j].lower() != query_token:  # Проверка соответствия POS-тега
-                    return False  # Если не совпадает, возвращаем False
-            else:
-                # Проверка соответствия слова, леммы и POS-тега
-                if not self.match_token(query_token, words[j], lemmas[j], pos_tags[j]):
-                    return False  # Если не совпадает, возвращаем False
-        return True  # Если все токены совпадают, возвращаем True
+    def frequency(self, query):  # функция, определяющая частотность, принимает результаты поиска
+        search_results = self.search(query)
+        freq_list = {}  # вариант ответа на запрос : его частотность
+        for results_elem in search_results:
+            entry_indexes = results_elem[1]  # на каких номерах слова, соответствующие самому запросу (номер первого слова и следующего после последнего слова)
+            sent_num = results_elem[2]
+            for i in entry_indexes:
+                entry_tokens = self.tokens[sent_num][i[0]:i[1]]
+                entry = detokenize(entry_tokens).replace('- ', '-')
+                freq_list[entry] = freq_list.get(entry, 0) + 1
+        freq_list_array = list(freq_list.items())
+        freq_list_sorted =  sorted(freq_list_array, key=lambda x: x[1], reverse=True)
+        return freq_list_sorted
