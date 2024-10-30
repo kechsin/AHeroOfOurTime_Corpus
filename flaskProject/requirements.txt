@@ -1,0 +1,4 @@
+Flask
+pymorphy2
+re
+csv
