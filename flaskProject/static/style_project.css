@@ -1,0 +1,206 @@
+/* Основные заголовки */
+/* Общие стили для заголовков различных уровней */
+.title, .meta-title, .title-2, .title-3 {
+    width: 100%;
+    margin: 10px auto;
+    padding: 20px;
+    font-family: 'Arial Black', sans-serif;
+    display: flex;
+    justify-content: center;
+    color: rgb(32, 61, 53);
+    font-size: 20px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+/* Стили для заголовка первого уровня */
+.title {
+    font-size: 20px;
+    color: rgb(32, 61, 53);
+    background-color: rgb(255, 168, 168);
+    border: 2px solid rgb(32, 61, 53);
+}
+
+/* Стили для мета-заголовка */
+.meta-title {
+    font-size: 20px;
+    background-color: rgb(262, 188, 177);
+    border: 2px solid rgb(32, 61, 53);
+}
+
+/* Стили для заголовка второго уровня */
+.title-2 {
+    color: rgb(148, 90, 65);
+    background-color: rgb(255, 231, 158);
+    border: 2px solid rgb(148, 90, 65); /* Цвет обводки изменен на #945A41 */
+}
+
+/* Стили для заголовка третьего уровня */
+.title-3 {
+    color: rgb(32, 61, 53); /* Цвет шрифта в формате RGB */
+    background-color: rgb(208, 231, 186);
+    border: 2px solid rgb(32, 61, 53);
+}
+
+/* Основной текст */
+/* Стили для основного текста и мета-информации */
+.meta-information, .meta-information-2 {
+    width: 100%;
+    margin: 10px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: rgb(32, 61, 53);
+    border: 2px solid rgb(32, 61, 53);
+    border-radius: 30px;
+    background-color: rgb(254, 225, 213);
+    text-align: justify;
+}
+
+/* Дополнительные стили для мета-информации второго типа */
+.meta-information-2 {
+    color: rgb(148, 90, 65);
+    border-color: rgb(148, 90, 65);
+    background-color: rgb(246, 240, 227);
+    text-align: left;
+}
+
+/* Панель навигации */
+/* Стили для панели навигации */
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+    background-color: rgb(242, 205, 172);
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+
+/* Стили для ссылок на панели навигации */
+.navbar a {
+    padding: 20px 30px;
+    text-decoration: none;
+    font-size: 24px;
+    font-family: 'Arial Black', Arial, sans-serif;
+    color: rgb(32, 61, 53);
+    background-color: rgb(254, 225, 213);
+    border-radius: 30px;
+    transition: transform 0.2s;
+}
+
+/* Эффект наведения для ссылок на панели навигации */
+.navbar a:hover {
+    transform: scale(1.05); /* Увеличение кнопки при наведении */
+}
+
+/* Кнопка поиска */
+/* Стили для блока с кнопкой поиска */
+.search {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Основные стили для большой кнопки */
+.big-button {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px 30px;
+    font-size: 20px;
+    font-family: 'Arial Black', sans-serif;
+    color: rgb(246, 240, 227);
+    background-color: #FFA8A8;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+/* Эффект наведения для большой кнопки */
+.big-button:hover {
+    transform: scale(1.1); /* Увеличение кнопки */
+    background-color: rgb(255, 127, 127); /* Изменение цвета при наведении */
+}
+
+/* Кнопка копирования */
+/* Стили для кнопки копирования */
+.copy-button {
+    background: none;
+    border: none;
+    color: rgb(32, 61, 53);
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+/* Эффект наведения для кнопки копирования */
+.copy-button:hover {
+    color: rgb(255, 127, 127);
+}
+
+/* Дополнительные стили */
+/* Стили для элементов списка */
+.list-group-item {
+    font-style: italic;
+    color: rgb(32, 61, 53);
+}
+
+/* Стили для шрифта Arial Black */
+.arial-black {
+    font-family: 'Arial Black', sans-serif;
+    color: rgb(32, 61, 53);
+}
+
+/* Поле ввода для поиска */
+.search-input {
+    width: 600px; /* Задайте нужную ширину, например, 400px */
+    padding: 10px;
+    font-size: 1em;
+    border: 2px solid rgb(148, 90, 65); /* Цвет обводки */
+    border-radius: 30px;
+}
+
+/* Кнопка для выполнения поиска */
+.search-button {
+    background-color: rgb(148, 90, 65); /* Цвет кнопки */
+    color: #FFF; /* Цвет текста кнопки */
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-family: 'Arial Black', sans-serif;
+    cursor: pointer;
+    margin-left: 10px; /* Отступ слева для разделения с полем ввода */
+}
+
+/* Эффект наведения для кнопки поиска */
+.search-button:hover {
+    background-color: rgb(128, 70, 45); /* Цвет при наведении */
+}
+
+/* Приветственное сообщение */
+/* Стили для приветственного сообщения */
+.welcome-message {
+    background-color: rgb(246, 240, 227); /* Цвет фона */
+    border: 2px solid rgb(148, 90, 65); /* Цвет обводки */
+    padding: 20px; /* Отступы внутри блока */
+    border-radius: 30px; /* Закругленные углы */
+    text-align: center; /* Центрирование текста */
+    margin: 0 auto; /* Центрирование блока */
+    width: 100%; /* Установите желаемую ширину */
+    max-width: 1300px; /* Максимальная ширина, чтобы окно не было слишком широким */
+}
+
+/* Стили для текста внутри приветственного сообщения */
+.welcome-message p {
+    font-family: 'Arial Black', sans-serif; /* Шрифт 945A41 */
+    color: rgb(148, 90, 65); /* Цвет текста 945A41 */
+    font-size: 20px; /* Размер шрифта */
+}
+
+/* Стили для текста результата поиска */
+.result-text {
+    font-family: 'Arial Black', sans-serif;
+    color: rgb(148, 90, 65); /* Задайте нужный цвет */
+}
