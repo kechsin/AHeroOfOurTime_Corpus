@@ -1,6 +1,8 @@
 # AHeroOfOurTime_Corpus
 ## Инструкция по сайту
-[Сам сайт](https://nastya1219.pythonanywhere.com/)
+
+[Сайт 1](https://anastasiaklenowa.pythonanywhere.com/search) (без часотности с выделением жирным фрифтом искомых слов и подчеркиванием слов с устаревшим значением)
+[Сайт 2](https://nastya1219.pythonanywhere.com/) (с частотностью)
 
 На сайте есть четыре основные кнопки.
 
