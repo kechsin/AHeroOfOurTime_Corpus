@@ -1,6 +1,6 @@
 # AHeroOfOurTime_Corpus
 ## Инструкция по сайту
-[Сам сайт]()
+[Сам сайт](https://anastasiaklenowa.pythonanywhere.com)
 
 На сайте есть три основные кнопки.
 
