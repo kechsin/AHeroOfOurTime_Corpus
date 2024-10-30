@@ -13,7 +13,7 @@
 
 `corpus_data_with_labels.csv` — CSV файл, где хранится та же информация, что и в `corpus_data.csv` только добавилась 6 колонка с пометкой устаревшести слова (бинарная разметка).
 
-`is_obsolete_hero.ipynb` — код, размечающий устаревшие слова связые из {Словаря устаревших слов href = https://azbyka.ru/otechnik/Spravochniki/slovar-ustarevshih-slov/}
+`is_obsolete_hero.ipynb` — код, размечающий устаревшие слова связые из [Словаря устаревших слов](https://azbyka.ru/otechnik/Spravochniki/slovar-ustarevshih-slov/)
 
 ## Морфологическая разметка
 NOUN: существительное;
