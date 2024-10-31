@@ -23,7 +23,7 @@
 
 Для локального запуска сайта в терминале создайте виртуальную среду `python -m venv venv`. 
 
-Активируйте виртуальную среду: для Mac `source venv/bin/activate`, а для Windowc `venv\Scripts\activate`. 
+Активируйте виртуальную среду: для Mac `source venv/bin/activate`, а для Windows `venv\Scripts\activate`. 
 
 Загрузите нужные библиотеки с помощью команды`pip install -r requirements.txt`.
 
